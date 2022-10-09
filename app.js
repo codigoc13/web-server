@@ -1,24 +1,19 @@
-const http = require('http')
+const express = require('express')
+const app = express()
+const port = 8013
 
-/**
- * En el parámetro request se encuentran las solicitudes al servidor
- * La response es lo que el servidor le va a responder al cliente
- * */
+app.get('/', (req, res) => {
+  res.send('Home Page')
+})
 
-http
-  .createServer((req, res) => {
-    // res.writeHead(200, { 'Content-Type': 'text/plain' })
-    // console.log(req)
-    // res.write('Hola Mundo')
+app.get('/hola-mundo', (req, res) => {
+  res.send('Hola mundo en su respectiva ruta')
+})
 
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    persona = {
-      nombre: 'Sergio',
-      profesion: 'Programador',
-    }
-    res.write(JSON.stringify(persona))
-    res.end()
-  })
-  .listen(8013)
+app.get('*', (req, res) => {
+  res.send('404 | Page not found')
+})
 
-console.log('Escuchando el puerto', 8013)
+app.listen(port, () => {
+  console.log(`Escuchando en http://localhost:${port}`)
+})
