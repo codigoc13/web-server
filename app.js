@@ -7,7 +7,16 @@ const http = require('http')
 
 http
   .createServer((req, res) => {
-    res.write('Hola Mundo')
+    // res.writeHead(200, { 'Content-Type': 'text/plain' })
+    // console.log(req)
+    // res.write('Hola Mundo')
+
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    persona = {
+      nombre: 'Sergio',
+      profesion: 'Programador',
+    }
+    res.write(JSON.stringify(persona))
     res.end()
   })
   .listen(8013)
